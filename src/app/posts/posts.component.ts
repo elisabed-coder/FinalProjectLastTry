@@ -47,7 +47,6 @@ export class PostsComponent implements OnInit {
       (response) => {
         console.log(response);
 
-        // Update users array with the user data from response
         this.users = [
           {
             id: response.userId,
@@ -62,7 +61,7 @@ export class PostsComponent implements OnInit {
 
         // Adjust IDs of existing posts
         this.posts.forEach((post) => {
-          post.id++; // Decrease ID by 1 for each existing post
+          post.id++;
         });
 
         // Construct the new post object

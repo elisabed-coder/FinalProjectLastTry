@@ -1,0 +1,37 @@
+section {
+  background-image: url(/assets/images/435702945_823950852898885_2457430471199027821_n.png);
+}
+
+.todoList {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  margin: 0 auto;
+  font-size: 18px;
+  box-shadow: rgba(5, 28, 139, 0.45) 3.95px 3.95px 2.6px;
+  padding: 25px;
+  margin-top: 20px;
+  background-color: #ffff;
+  border-radius: 10px;
+
+  div {
+    display: flex;
+    gap: 15px;
+    h4 {
+      color: rgb(50, 140, 230);
+    }
+    p {
+      font-weight: 600;
+    }
+  }
+}
+
+.fa-check {
+  color: rgb(19, 114, 19);
+  cursor: pointer;
+}
+
+.fa-xmark {
+  color: red;
+  cursor: pointer;
+}

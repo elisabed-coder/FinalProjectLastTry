@@ -14,6 +14,7 @@ import { NotFoundComponentComponent } from './not-found-component/not-found-comp
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { CommentsComponent } from './posts/edit-post/comments/comments.component';
+import { AlbumDetailsComponent } from './albums/album-details/album-details.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { CommentsComponent } from './posts/edit-post/comments/comments.component
     TodoComponent,
     NotFoundComponentComponent,
     CommentsComponent,
+    AlbumDetailsComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [],

@@ -6,6 +6,7 @@ import { EditPostComponent } from './posts/edit-post/edit-post.component';
 import { AlbumsComponent } from './albums/albums.component';
 import { TodoComponent } from './todo/todo.component';
 import { NotFoundComponentComponent } from './not-found-component/not-found-component.component';
+import { AlbumDetailsComponent } from './albums/album-details/album-details.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,10 @@ const routes: Routes = [
   {
     path: 'albums',
     component: AlbumsComponent,
+  },
+  {
+    path: 'albums/:id',
+    component: AlbumDetailsComponent,
   },
   {
     path: 'todos',

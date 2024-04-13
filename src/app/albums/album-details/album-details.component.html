@@ -1,0 +1,11 @@
+<section>
+  <div class="imgs-container">
+    <div *ngFor="let image of allAlbumDetails" class="image-box">
+      <img [src]="image.url" alt="" />
+      <div>
+        <h2>Title:</h2>
+        <p>{{ image.title }}</p>
+      </div>
+    </div>
+  </div>
+</section>

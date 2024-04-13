@@ -1,1 +1,24 @@
-<p>albums works!</p>
+<section>
+  <div class="post-section-container">
+    <button class="addPost-btn">Add Post</button>
+    <div class="posts-container">
+      <ul class="post-headers">
+        <li>POST'S USER</li>
+        <li>TITLE</li>
+        <li>BODY</li>
+      </ul>
+      <div class="post-information">
+        <!-- <ul *ngFor="let task of allTasks"> -->
+        <ul
+          *ngFor="let album of allAlbums"
+          (click)="navigateToalbumDetails(album.id)"
+        >
+          <li>{{ getUserById(album.userId)?.name }}</li>
+          <li>{{ album.title }}</li>
+          <li>50</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+<router-outlet></router-outlet>

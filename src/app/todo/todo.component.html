@@ -1,1 +1,15 @@
-<p>todo works!</p>
+<section>
+  <div *ngFor="let toDo of todoList" class="todoList">
+    <div>
+      <h4>Title:</h4>
+      <p>{{ toDo.title }}</p>
+    </div>
+    <div>
+      <h4>Completion:</h4>
+      <div (click)="toggleCompletion(toDo)">
+        <i *ngIf="toDo.completed" class="fa-solid fa-check"></i>
+        <i *ngIf="!toDo.completed" class="fa-solid fa-xmark"></i>
+      </div>
+    </div>
+  </div>
+</section>
