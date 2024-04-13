@@ -1,0 +1,26 @@
+<app-add-post
+  *ngIf="showCreateTaskForm"
+  (EmitTaskData)="CreateTask($event)"
+  (CloseForm)="CloseCreateTaskForm()"
+></app-add-post>
+<section>
+  <div class="post-section-container">
+    <button class="addPost-btn" (click)="OpenCreateTaskForm()">Add Post</button>
+    <div class="posts-container">
+      <ul class="post-headers">
+        <li>POST'S USER</li>
+        <li>TITLE</li>
+        <li>BODY</li>
+      </ul>
+      <div class="post-information">
+        <ul *ngFor="let post of posts" (click)="editPost(post.id)">
+          <li>
+            {{ getUserById(post.userId) }}
+          </li>
+          <li>{{ post.title }}</li>
+          <li>{{ post.body }}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

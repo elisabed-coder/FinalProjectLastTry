@@ -1,0 +1,53 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  .popup {
+    margin: 30px auto;
+    padding: 40px;
+    background-color: rgb(26, 179, 230);
+    border-radius: 5px;
+    width: 60%;
+    color: #ffff;
+    position: relative;
+    top: 10%;
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.form input {
+  padding: 10px;
+}
+.form div:not(:last-of-type) {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.form button {
+  color: #ffff;
+  background-color: rgb(190, 2, 2);
+  border-radius: 2px;
+  border: none;
+  padding: 10px 20px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.popup i {
+  font-size: 24px;
+  transition: all 0.4s ease;
+}
+.popup i:hover {
+  color: rgb(12, 100, 130);
+}
+
+.error {
+  color: rgb(190, 2, 2);
+}
