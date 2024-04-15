@@ -17,10 +17,6 @@ export class albumsService {
     return this.http.get<albums[]>(` ${this.apiUrl}`);
   }
 
-  // getUsers(): Observable<User[]> {
-  //   return this.http.get<User[]>('https://jsonplaceholder.typicode.com/users');
-  // }
-
   getalbums(): Observable<albumsDetails[]> {
     return this.http.get<albumsDetails[]>(
       'https://jsonplaceholder.typicode.com/albums/1/photos'

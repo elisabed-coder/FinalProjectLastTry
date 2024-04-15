@@ -1,27 +1,29 @@
-<div *ngIf="post">
-  <div class="edit-form">
-    <form #postForm="ngForm">
-      <button type="button" (click)="goBack()" class="go-back-btn">
-        <i class="fa-solid fa-arrow-left" cl></i>
-      </button>
-      <div>
-        <label>Title</label>
-        <input type="text" [(ngModel)]="post.title" name="title" required />
-        <br />
-        <label>Body</label>
-        <textarea
-          [(ngModel)]="post.body"
-          name="body"
-          required
-          cols="30"
-          rows="6"
-        ></textarea>
-        <br />
-        <button type="submit">Edit</button>
-      </div>
-    </form>
+<section>
+  <div class="container">
+    <div class="edit-form">
+      <form #postForm="ngForm" *ngIf="post">
+        <button type="button" (click)="goBack()" class="go-back-btn">
+          <i class="fa-solid fa-arrow-left" cl></i>
+        </button>
+        <div>
+          <label>Title</label>
+          <input type="text" [(ngModel)]="post.title" name="title" required />
+          <br />
+          <label>Body</label>
+          <textarea
+            [(ngModel)]="post.body"
+            name="body"
+            required
+            cols="30"
+            rows="6"
+          ></textarea>
+          <br />
+          <button type="submit">Edit</button>
+        </div>
+      </form>
+    </div>
+    <div>
+      <app-comments></app-comments>
+    </div>
   </div>
-  <div>
-    <app-comments></app-comments>
-  </div>
-</div>
+</section>

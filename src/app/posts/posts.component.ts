@@ -85,6 +85,6 @@ export class PostsComponent implements OnInit {
   }
 
   editPost(postId: number) {
-    this.router.navigate(['/posts', postId]);
+    this.router.navigate(['/post', postId]);
   }
 }

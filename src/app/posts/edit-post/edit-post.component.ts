@@ -44,20 +44,4 @@ export class EditPostComponent implements OnInit {
   goBack(): void {
     this.router.navigate(['/posts']);
   }
-
-  validateInputs(): boolean {
-    return (
-      this.post.title.trim().length > 0 && this.post.body.trim().length > 0
-    );
-  }
 }
-// updatePost(): void {
-//   if (this.validateInputs()) {
-//     this.apiService.updatePost(this.post).subscribe({
-//       next: () => this.goBack(),
-//       error: (error) => console.error('Error updating post:', error),
-//     });
-//   } else {
-//     this.showError = true; // Show error messages
-//   }
-// }
