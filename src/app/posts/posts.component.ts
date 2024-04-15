@@ -10,13 +10,15 @@ import { Router } from '@angular/router';
   styleUrls: ['./posts.component.scss'],
 })
 export class PostsComponent implements OnInit {
+  editmode: boolean = false;
+
   users: User[] = [];
   posts: Post[] = [];
   latestPostId: number = 1;
 
   showCreateTaskForm: boolean = false;
 
-  constructor(private postService: postService, private router: Router) {}
+  constructor(public postService: postService, private router: Router) {}
 
   ngOnInit(): void {
     this.postService.getUsers().subscribe((user) => {
@@ -86,5 +88,14 @@ export class PostsComponent implements OnInit {
 
   editPost(postId: number) {
     this.router.navigate(['/post', postId]);
+  }
+
+  onPostEdited(editedPost: Post) {
+    console.log(editedPost);
+    //   const index = this.posts.findIndex((post) => post.id === editedPost.id);
+    //   if (index !== -1) {
+    //     this.posts[index] = editedPost;
+    //   }
+    //
   }
 }

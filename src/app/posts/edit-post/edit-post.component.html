@@ -1,9 +1,9 @@
 <section>
   <div class="container">
     <div class="edit-form">
-      <form #postForm="ngForm" *ngIf="post">
+      <form #postForm="ngForm" (ngSubmit)="editPost(postForm.value)">
         <button type="button" (click)="goBack()" class="go-back-btn">
-          <i class="fa-solid fa-arrow-left" cl></i>
+          <i class="fa-solid fa-arrow-left"></i>
         </button>
         <div>
           <label>Title</label>

@@ -24,3 +24,7 @@
     </div>
   </div>
 </section>
+<app-edit-post
+  *ngIf="editmode"
+  (postEdited)="onPostEdited($event)"
+></app-edit-post>

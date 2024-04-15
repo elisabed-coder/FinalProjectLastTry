@@ -1,5 +1,14 @@
-import { Component, Input, OnInit, inject } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  inject,
+} from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgFooterTemplateDirective } from '@ng-select/ng-select';
 import { Post } from 'src/app/Interfaces/posts.interface';
 import { postService } from 'src/app/Services/posts.service';
 
@@ -9,7 +18,8 @@ import { postService } from 'src/app/Services/posts.service';
   styleUrls: ['./edit-post.component.scss'],
 })
 export class EditPostComponent implements OnInit {
-  post!: Post; // Default values ensure 'post' is never null
+  @Output() postEdited: EventEmitter<any> = new EventEmitter<any>();
+  post!: Post;
   postId!: number;
   showError = false; // Flag to show/hide error messages
 
@@ -30,6 +40,8 @@ export class EditPostComponent implements OnInit {
 
       if (foundPost) {
         this.post = foundPost;
+        // this.post.title = title;
+        // this.post.body = body;
       } else {
         console.error(`Post with ID ${this.postId} not found.`);
         // Handle the case where the post is not found, such as redirecting to a 404 page
@@ -43,5 +55,18 @@ export class EditPostComponent implements OnInit {
   }
   goBack(): void {
     this.router.navigate(['/posts']);
+  }
+
+  editPost(data: any) {
+    this.post = {
+      userId: this.post.userId,
+      id: this.post.id,
+      title: data.title,
+      body: data.body,
+    };
+
+    this.postEdited.emit(this.post); // Emit the edited post
+    console.log(this.post); // Log the edited post
+    this.goBack();
   }
 }
