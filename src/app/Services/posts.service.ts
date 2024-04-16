@@ -46,24 +46,10 @@ export class postService {
     );
   }
 
-  // getPostById(id: number): Observable<Post> {
-  //   const foundPost = this.posts.find((p) => p.id === id);
-  //   if (foundPost) {
-  //     return of(foundPost); // Return the found post from the local array
-  //   } else {
-  //     return this.http
-  //       .get<Post>(`https://jsonplaceholder.typicode.com/posts/${id}`)
-  //       .pipe(
-  //         catchError((error: HttpErrorResponse) => {
-  //           if (error.status === 404) {
-  //             // Handle not found error here, maybe return a default post or throw an error
-  //             return throwError('Post not found');
-  //           } else {
-  //             // Handle other errors
-  //             return throwError('Error fetching post');
-  //           }
-  //         })
-  //       );
-  //   }
-  // }
+  updatePost(data: any) {
+    return this.http.put<Observable<any>>(
+      'https://jsonplaceholder.typicode.com/posts/',
+      data
+    );
+  }
 }

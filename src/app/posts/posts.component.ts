@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { postService } from '../Services/posts.service';
 import { User } from '../Interfaces/user.interface';
 import { Post } from '../Interfaces/posts.interface';
 import { Router } from '@angular/router';
+import { EditPostComponent } from './edit-post/edit-post.component';
 
 @Component({
   selector: 'app-posts',
@@ -11,6 +12,7 @@ import { Router } from '@angular/router';
 })
 export class PostsComponent implements OnInit {
   editmode: boolean = false;
+  selectedPost: Post | null = null;
 
   users: User[] = [];
   posts: Post[] = [];
@@ -86,16 +88,16 @@ export class PostsComponent implements OnInit {
     );
   }
 
-  editPost(postId: number) {
-    this.router.navigate(['/post', postId]);
+  editPost(post: any) {
+    // this.editmode = true;
+    // this.selectedPost = post;
+    // console.log(this.selectedPost);
+    let ggg = post;
+    console.log(ggg);
+    this.router.navigate(['/post', post.id], { state: { post } });
   }
 
-  onPostEdited(editedPost: Post) {
-    console.log(editedPost);
-    //   const index = this.posts.findIndex((post) => post.id === editedPost.id);
-    //   if (index !== -1) {
-    //     this.posts[index] = editedPost;
-    //   }
-    //
+  onPostEdited(data: any) {
+    console.log(data);
   }
 }

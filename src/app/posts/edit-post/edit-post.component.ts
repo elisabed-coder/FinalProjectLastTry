@@ -11,6 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgFooterTemplateDirective } from '@ng-select/ng-select';
 import { Post } from 'src/app/Interfaces/posts.interface';
 import { postService } from 'src/app/Services/posts.service';
+import { PostsComponent } from '../posts.component';
 
 @Component({
   selector: 'app-edit-post',
@@ -19,10 +20,11 @@ import { postService } from 'src/app/Services/posts.service';
 })
 export class EditPostComponent implements OnInit {
   @Output() postEdited: EventEmitter<any> = new EventEmitter<any>();
+  @Input() selectedPost: Post | null = null;
   post!: Post;
   postId!: number;
-  showError = false; // Flag to show/hide error messages
-
+  showError = false;
+  editedPostData: any = {};
   constructor(
     private postService: postService,
     private router: Router,
@@ -31,42 +33,41 @@ export class EditPostComponent implements OnInit {
 
   ngOnInit(): void {
     const id = this.activeRoute.snapshot.paramMap.get('id');
-
     if (id !== null) {
       this.postId = +id;
       const foundPost = this.postService.posts.find(
         (post) => post.id === this.postId
       );
-
       if (foundPost) {
-        this.post = foundPost;
-        // this.post.title = title;
-        // this.post.body = body;
+        this.selectedPost = foundPost; // Assign found post to selectedPost
       } else {
         console.error(`Post with ID ${this.postId} not found.`);
-        // Handle the case where the post is not found, such as redirecting to a 404 page
-        // this.router.navigate(['/404']);
       }
     } else {
       console.error('ID parameter is null.');
-      // Handle the case where the ID parameter is null, such as redirecting to a 404 page
-      // this.router.navigate(['/404']);
     }
+    console.log(this.selectedPost);
   }
+
   goBack(): void {
     this.router.navigate(['/posts']);
   }
 
   editPost(data: any) {
-    this.post = {
-      userId: this.post.userId,
-      id: this.post.id,
-      title: data.title,
-      body: data.body,
-    };
+    if (this.selectedPost) {
+      const changespost = {
+        userId: this.selectedPost.userId,
+        id: this.selectedPost.id,
+        ...data.value,
+      };
+      // Save edited post data
+      this.editedPostData = changespost;
 
-    this.postEdited.emit(this.post); // Emit the edited post
-    console.log(this.post); // Log the edited post
-    this.goBack();
+      // Emit the edited post data
+      this.postEdited.emit(changespost);
+
+      console.log(changespost);
+      this.goBack();
+    }
   }
 }
