@@ -24,10 +24,4 @@ export class albumsService {
   getAlbumDetailsById(id: number): Observable<albumsDetails[]> {
     return this.http.get<albumsDetails[]>(`${this.apiurl2}`);
   }
-
-  // getPhotosCount(albumId: number): Observable<number> {
-  //   return this.http
-  //     .get<albums[]>(`${this.apiUrl}`)
-  //     .pipe(map((photos) => photos.length));
-  // }
 }

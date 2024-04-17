@@ -36,4 +36,8 @@ export class AlbumsComponent implements OnInit {
   navigateToalbumDetails(albumId: number) {
     this.router.navigate(['/albums', albumId]);
   }
+
+  getPhotosNumber(albumId: number): number {
+    return this.allAlbums?.filter((photo) => photo.id === albumId).length;
+  }
 }
