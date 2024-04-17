@@ -40,10 +40,10 @@ export class EditPostComponent implements OnInit {
     this.router.navigate([`/posts`]);
   }
   saveChanges() {
-    console.log(this.post);
-    this.postservice.updatePost(this.post);
-    //   console.log('Post updated successfully');
-    // });
+    this.postservice.updatePost(this.post).subscribe((res) => {
+      console.log('Post updated successfully', res);
+    });
+
     this.goBack();
   }
 }

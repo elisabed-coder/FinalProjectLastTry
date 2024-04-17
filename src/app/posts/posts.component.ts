@@ -52,7 +52,7 @@ export class PostsComponent implements OnInit {
         }));
 
         const newPost: Post = {
-          userId: response.userId,
+          userId: 101,
           id: 1,
           title: response.title,
           body: response.body,

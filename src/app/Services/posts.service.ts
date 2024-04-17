@@ -1,7 +1,14 @@
 import { Injectable, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable, forkJoin, map, throwError } from 'rxjs';
+import {
+  BehaviorSubject,
+  Observable,
+  catchError,
+  forkJoin,
+  map,
+  throwError,
+} from 'rxjs';
 import { User } from '../Interfaces/user.interface';
 import { Post } from '../Interfaces/posts.interface';
 
@@ -9,6 +16,7 @@ import { Post } from '../Interfaces/posts.interface';
   providedIn: 'root',
 })
 export class postService implements OnInit {
+  // error = false;
   public postsSubject: BehaviorSubject<Post[]> = new BehaviorSubject<Post[]>(
     []
   );
@@ -48,7 +56,9 @@ export class postService implements OnInit {
   }
 
   getUsers() {
-    return this.http.get<User[]>('https://jsonplaceholder.typicode.com/users');
+    return this.http
+      .get<User[]>('https://jsonplaceholder.typicode.com/users')
+      .pipe(catchError(this.handleError));
   }
   getPosts(): Observable<Post[]> {
     return forkJoin({
@@ -79,10 +89,9 @@ export class postService implements OnInit {
   }
 
   CreateTask(data: any) {
-    return this.http.post<any>(
-      'https://jsonplaceholder.typicode.com/posts',
-      data
-    );
+    return this.http
+      .post<any>('https://jsonplaceholder.typicode.com/posts', data)
+      .pipe(catchError(this.handleError));
   }
 
   updatePost(updatedPost: Post | undefined): Observable<Post | undefined> {
@@ -91,6 +100,24 @@ export class postService implements OnInit {
     }
 
     const url = `https://jsonplaceholder.typicode.com/posts/${updatedPost.id}`;
-    return this.http.put<Post>(url, updatedPost);
+    return this.http
+      .put<Post>(url, updatedPost)
+      .pipe(catchError(this.handleError));
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    if (error.status === 0) {
+      // A clint-side or network error occurred. Handle it accordingly
+      console.error('An error occurred:', error.error);
+    } else {
+      // The backend returned an unsuccessful response code.
+      // The response body may contain clues as to what went wrong.
+      console.error(
+        `Backend returned code ${error.status}, body was: `,
+        error.error
+      );
+    }
+    // Return an observable with a user-facing error message.
+    return throwError('Something bad happened; please try again later.');
   }
 }
