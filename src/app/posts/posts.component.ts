@@ -1,9 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { postService } from '../Services/posts.service';
-import { User } from '../Interfaces/user.interface';
-import { Post } from '../Interfaces/posts.interface';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { EditPostComponent } from './edit-post/edit-post.component';
+import { User } from '../Interfaces/user.interface';
+import { HttpClient } from '@angular/common/http';
+import { Post } from '../Interfaces/posts.interface';
+import { postService } from '../Services/posts.service';
 
 @Component({
   selector: 'app-posts',
@@ -11,33 +11,25 @@ import { EditPostComponent } from './edit-post/edit-post.component';
   styleUrls: ['./posts.component.scss'],
 })
 export class PostsComponent implements OnInit {
-  editmode: boolean = false;
-  selectedPost: Post | null = null;
-
-  users: User[] = [];
-  posts: Post[] = [];
-  latestPostId: number = 1;
-
   showCreateTaskForm: boolean = false;
+  public users: User[] = [];
+  public posts: Post[] = [];
 
-  constructor(public postService: postService, private router: Router) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    public postservice: postService
+  ) {}
 
   ngOnInit(): void {
-    this.postService.getUsers().subscribe((user) => {
-      this.users = user;
-    });
-
-    this.postService.getPosts().subscribe((posts: Post[]) => {
-      this.posts = posts;
-      this.postService.posts = this.posts;
-    });
+    this.postservice.users$.subscribe((users) => {
+      this.users = users;
+    }),
+      this.postservice.posts$.subscribe((posts) => {
+        this.posts = posts;
+      });
+    this.postservice.getPostById;
   }
-
-  getUserById(userId: number): string {
-    const user = this.users.find((user) => user.id === userId);
-    return user ? user.name || '' : '';
-  }
-
   OpenCreateTaskForm() {
     this.showCreateTaskForm = true;
   }
@@ -47,57 +39,41 @@ export class PostsComponent implements OnInit {
   }
 
   CreateTask(data: Post) {
-    this.postService.CreateTask(data).subscribe(
+    this.postservice.CreateTask(data).subscribe(
       (response) => {
         console.log(response);
 
-        this.users = [
-          {
-            id: response.userId,
-            name: response.name,
-          },
-          ...this.users,
-        ];
-        console.log(this.users);
-
         // Fetch the user's name based on userId
-        const userName = this.getUserById(response.userId);
 
         // Adjust IDs of existing posts
-        this.posts.forEach((post) => {
-          post.id++;
-        });
+        const updatedPosts = this.posts.map((post) => ({
+          ...post,
+          id: post.id + 1,
+        }));
 
-        // Construct the new post object
         const newPost: Post = {
           userId: response.userId,
-          id: 1, // Use the ID 1 for the new post
+          id: 1,
           title: response.title,
           body: response.body,
-          name: userName, // Use the fetched user's name
+          name: response.name,
         };
 
-        // Add the new post at the beginning of the posts array
-        this.posts.unshift(newPost);
-        console.log(newPost);
+        // Update the posts array in the postService
+        this.postservice.updatePosts([newPost, ...updatedPosts]);
       },
-
       (error) => {
         console.error('Error creating task:', error);
       }
     );
   }
 
-  editPost(post: any) {
-    // this.editmode = true;
-    // this.selectedPost = post;
-    // console.log(this.selectedPost);
-    let ggg = post;
-    console.log(ggg);
-    this.router.navigate(['/post', post.id], { state: { post } });
+  getUserById(userId: number | undefined): string {
+    const user = this.users.find((user) => user.id === userId);
+    return user ? user.name || '' : '';
   }
-
-  onPostEdited(data: any) {
-    console.log(data);
+  gotoEdit(post: Post) {
+    console.log(post);
+    this.router.navigate(['posts', post.id]);
   }
 }

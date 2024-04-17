@@ -16,7 +16,7 @@ export class AddPostComponent implements OnInit {
   @Output()
   EmitTaskData: EventEmitter<Post> = new EventEmitter<Post>();
 
-  constructor() {}
+  constructor(private postservice: postService) {}
 
   ngOnInit(): void {}
 
@@ -25,6 +25,7 @@ export class AddPostComponent implements OnInit {
   }
 
   OnFormSubmitted(form: NgForm) {
+    this.postservice.CreateTask(form.value);
     this.EmitTaskData.emit(form.value);
     this.OnCloseForm();
   }

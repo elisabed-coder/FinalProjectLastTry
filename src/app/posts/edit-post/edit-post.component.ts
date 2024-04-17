@@ -10,8 +10,8 @@ import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgFooterTemplateDirective } from '@ng-select/ng-select';
 import { Post } from 'src/app/Interfaces/posts.interface';
-import { postService } from 'src/app/Services/posts.service';
 import { PostsComponent } from '../posts.component';
+import { postService } from 'src/app/Services/posts.service';
 
 @Component({
   selector: 'app-edit-post',
@@ -19,55 +19,31 @@ import { PostsComponent } from '../posts.component';
   styleUrls: ['./edit-post.component.scss'],
 })
 export class EditPostComponent implements OnInit {
-  @Output() postEdited: EventEmitter<any> = new EventEmitter<any>();
-  @Input() selectedPost: Post | null = null;
-  post!: Post;
-  postId!: number;
-  showError = false;
-  editedPostData: any = {};
+  post: Post | undefined;
+
   constructor(
-    private postService: postService,
+    private route: ActivatedRoute,
     private router: Router,
-    private activeRoute: ActivatedRoute
+    private postservice: postService
   ) {}
 
   ngOnInit(): void {
-    const id = this.activeRoute.snapshot.paramMap.get('id');
-    if (id !== null) {
-      this.postId = +id;
-      const foundPost = this.postService.posts.find(
-        (post) => post.id === this.postId
-      );
-      if (foundPost) {
-        this.selectedPost = foundPost; // Assign found post to selectedPost
-      } else {
-        console.error(`Post with ID ${this.postId} not found.`);
-      }
-    } else {
-      console.error('ID parameter is null.');
+    const routeId = this.route.snapshot.paramMap.get('id');
+    if (routeId) {
+      const postId = parseInt(routeId, 10);
+      this.postservice.getPostById(postId).subscribe((post) => {
+        this.post = post;
+      });
     }
-    console.log(this.selectedPost);
   }
-
   goBack(): void {
-    this.router.navigate(['/posts']);
+    this.router.navigate([`/posts`]);
   }
-
-  editPost(data: any) {
-    if (this.selectedPost) {
-      const changespost = {
-        userId: this.selectedPost.userId,
-        id: this.selectedPost.id,
-        ...data.value,
-      };
-      // Save edited post data
-      this.editedPostData = changespost;
-
-      // Emit the edited post data
-      this.postEdited.emit(changespost);
-
-      console.log(changespost);
-      this.goBack();
-    }
+  saveChanges() {
+    console.log(this.post);
+    this.postservice.updatePost(this.post);
+    //   console.log('Post updated successfully');
+    // });
+    this.goBack();
   }
 }

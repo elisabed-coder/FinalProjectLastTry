@@ -1,18 +1,13 @@
 <section>
   <div class="container">
     <div class="edit-form">
-      <form #postForm="ngForm" (ngSubmit)="editPost(postForm)">
-        <!-- <button type="button" (click)="goBack()" class="go-back-btn">
+      <form *ngIf="post" (ngSubmit)="saveChanges()">
+        <button type="button" (click)="goBack()" class="go-back-btn">
           <i class="fa-solid fa-arrow-left"></i>
-        </button> -->
-        <div *ngIf="selectedPost">
+        </button>
+        <div *ngIf="post">
           <label>Title</label>
-          <input
-            type="text"
-            name="title"
-            required
-            [(ngModel)]="selectedPost.title"
-          />
+          <input type="text" name="title" required [(ngModel)]="post.title" />
           <br />
           <label>Body</label>
           <textarea
@@ -20,7 +15,7 @@
             required
             cols="30"
             rows="6"
-            [(ngModel)]="selectedPost.body"
+            [(ngModel)]="post.body"
           >
           </textarea>
           <br />

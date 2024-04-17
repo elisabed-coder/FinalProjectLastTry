@@ -17,7 +17,6 @@ export class AlbumsComponent implements OnInit {
   constructor(
     private albumService: albumsService,
     private postsService: postService,
-    private http: HttpClient,
     private router: Router
   ) {}
 

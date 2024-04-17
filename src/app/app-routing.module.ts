@@ -22,7 +22,7 @@ const routes: Routes = [
     path: 'posts',
     component: PostsComponent,
   },
-  { path: 'post/:id', component: EditPostComponent },
+  { path: 'posts/:id', component: EditPostComponent },
 
   {
     path: 'albums',
