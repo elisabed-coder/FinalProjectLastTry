@@ -1,4 +1,4 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import {
@@ -15,8 +15,7 @@ import { Post } from '../Interfaces/posts.interface';
 @Injectable({
   providedIn: 'root',
 })
-export class postService implements OnInit {
-  // error = false;
+export class postService {
   public postsSubject: BehaviorSubject<Post[]> = new BehaviorSubject<Post[]>(
     []
   );
@@ -42,17 +41,6 @@ export class postService implements OnInit {
 
   updateUsers(users: User[]): void {
     this.usersSubject.next(users);
-  }
-
-  ngOnInit(): void {
-    this.getUsers().subscribe((user) => {
-      this.users = user;
-      console.log(this.users);
-    });
-    this.getPosts().subscribe((post) => {
-      this.posts = post;
-      console.log(this.posts);
-    });
   }
 
   getUsers() {

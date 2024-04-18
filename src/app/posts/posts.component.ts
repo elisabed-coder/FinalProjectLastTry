@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '../Interfaces/user.interface';
-import { HttpClient } from '@angular/common/http';
 import { Post } from '../Interfaces/posts.interface';
 import { postService } from '../Services/posts.service';
 
@@ -15,11 +14,7 @@ export class PostsComponent implements OnInit {
   public users: User[] = [];
   public posts: Post[] = [];
 
-  constructor(
-    private http: HttpClient,
-    private router: Router,
-    public postservice: postService
-  ) {}
+  constructor(private router: Router, public postservice: postService) {}
 
   ngOnInit(): void {
     this.postservice.users$.subscribe((users) => {
