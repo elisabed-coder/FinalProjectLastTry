@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { albumsService } from '../Services/albums.service';
 import { albums } from '../Interfaces/albums.interface';
 import { User } from '../Interfaces/user.interface';

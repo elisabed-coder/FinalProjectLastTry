@@ -1,16 +1,6 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output,
-  inject,
-} from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NgFooterTemplateDirective } from '@ng-select/ng-select';
 import { Post } from 'src/app/Interfaces/posts.interface';
-import { PostsComponent } from '../posts.component';
 import { postService } from 'src/app/Services/posts.service';
 
 @Component({

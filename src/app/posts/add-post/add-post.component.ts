@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
 import { Post } from 'src/app/Interfaces/posts.interface';
 import { postService } from 'src/app/Services/posts.service';
 

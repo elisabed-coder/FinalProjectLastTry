@@ -1,6 +1,5 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { albumsDetails } from 'src/app/Interfaces/albumsDetails.interface';
 import { albumsService } from 'src/app/Services/albums.service';
 
