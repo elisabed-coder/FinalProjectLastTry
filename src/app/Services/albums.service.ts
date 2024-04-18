@@ -30,6 +30,25 @@ export class albumsService {
       .get<albumsDetails[]>(`${this.apiurl2}`)
       .pipe(catchError(this.handleError));
   }
+
+  getPhotosCount(albumId: number): Observable<number> {
+    return this.http
+      .get<albums[]>(`${this.apiUrl}`)
+      .pipe(map((photos) => photos.length));
+  }
+
+  getPhotos(): Observable<albumsDetails[]> {
+    return this.http.get<albumsDetails[]>(
+      'https://jsonplaceholder.typicode.com/photos'
+    );
+  }
+
+  getPhotosByAlbumId(albumId: number): Observable<albumsDetails[]> {
+    return this.http.get<albumsDetails[]>(
+      `https://jsonplaceholder.typicode.com/albums/${albumId}/photos`
+    );
+  }
+
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {
       // A clint-side or network error occurred. Handle it accordingly

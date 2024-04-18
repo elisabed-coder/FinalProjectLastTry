@@ -4,6 +4,8 @@ import { albums } from '../Interfaces/albums.interface';
 import { User } from '../Interfaces/user.interface';
 import { Router } from '@angular/router';
 import { postService } from '../Services/posts.service';
+import { AlbumDetailsComponent } from './album-details/album-details.component';
+import { albumsDetails } from '../Interfaces/albumsDetails.interface';
 
 @Component({
   selector: 'app-albums',
@@ -13,6 +15,8 @@ import { postService } from '../Services/posts.service';
 export class AlbumsComponent implements OnInit {
   allAlbums: albums[] = [];
   allUsers: User[] = [];
+  albumsDetails: albumsDetails[] = [];
+
   constructor(
     private albumService: albumsService,
     private postsService: postService,
@@ -23,9 +27,16 @@ export class AlbumsComponent implements OnInit {
     this.albumService.getAlbumsTitle().subscribe((response) => {
       this.allAlbums = response;
     });
+
     this.postsService.getUsers().subscribe((response) => {
       this.allUsers = response;
     });
+
+    this.albumService
+      .getPhotos()
+      .subscribe((albumsDetails: albumsDetails[]) => {
+        this.albumsDetails = albumsDetails;
+      });
   }
 
   getUserById(userId: number): User | undefined {
@@ -37,6 +48,7 @@ export class AlbumsComponent implements OnInit {
   }
 
   getPhotosNumber(albumId: number): number {
-    return this.allAlbums?.filter((photo) => photo.id === albumId).length;
+    return this.albumsDetails?.filter((photo) => photo.albumId === albumId)
+      .length;
   }
 }

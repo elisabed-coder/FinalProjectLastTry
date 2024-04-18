@@ -29,5 +29,10 @@ export class AlbumDetailsComponent implements OnInit {
           this.allAlbumDetails = albumDetails;
         });
     });
+    this.albumService
+      .getPhotos()
+      .subscribe((allAlbumDetails: albumsDetails[]) => {
+        this.allAlbumDetails = allAlbumDetails;
+      });
   }
 }
