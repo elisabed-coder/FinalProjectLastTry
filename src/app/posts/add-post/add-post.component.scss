@@ -7,8 +7,8 @@
   background: rgba(0, 0, 0, 0.7);
   .popup {
     margin: 30px auto;
-    padding: 40px;
-    background-color: rgb(26, 179, 230);
+    padding: 60px;
+    background-color: rgb(65, 159, 253);
     border-radius: 5px;
     width: 60%;
     color: #ffff;
@@ -21,10 +21,17 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  label {
+    margin-top: 15px;
+    font-size: 18px;
+  }
 }
 .form input {
   padding: 10px;
+  border: none;
+  border-radius: 5px;
 }
+
 .form div:not(:last-of-type) {
   display: flex;
   flex-direction: column;
@@ -38,11 +45,20 @@
   border: none;
   padding: 10px 20px;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  margin-top: 10px;
+  font-weight: bold;
+  font-size: 18px;
+  transition: all 0.4s ease;
+}
+
+.form button:hover {
+  background-color: rgb(128, 11, 11);
 }
 
 .popup i {
   font-size: 24px;
   transition: all 0.4s ease;
+  cursor: pointer;
 }
 .popup i:hover {
   color: rgb(12, 100, 130);
