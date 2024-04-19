@@ -32,6 +32,10 @@ li {
   }
 }
 
+input.ng-invalid {
+  border: 1px solid red;
+}
+
 .post-information ul {
   display: flex;
   cursor: pointer;

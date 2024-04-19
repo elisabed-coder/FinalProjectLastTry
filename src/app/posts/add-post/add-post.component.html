@@ -8,16 +8,16 @@
       (ngSubmit)="OnFormSubmitted(taskForm)"
     >
       <div>
-        <label>Post Author</label>
-        <input type="text" name="name" [required]="true" ngModel />
+        <label for="name">Post Author</label>
+        <input type="text" name="name" required ngModel />
       </div>
       <div>
         <label for="">Title</label>
-        <input type="text" name="title" [required]="true" ngModel />
+        <input type="text" name="title" required ngModel />
       </div>
       <div>
         <label for="">Body</label>
-        <input type="text" name="body" [required]="true" ngModel />
+        <input type="text" name="body" required ngModel />
       </div>
       <div>
         <button type="submit" [disabled]="taskForm.invalid">Add</button>

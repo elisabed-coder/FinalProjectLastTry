@@ -26,7 +26,6 @@ export class AddPostComponent implements OnInit {
   }
 
   OnFormSubmitted(form: NgForm) {
-    this.postservice.CreateTask(form.value);
     this.EmitTaskData.emit(form.value);
     this.OnCloseForm();
   }
