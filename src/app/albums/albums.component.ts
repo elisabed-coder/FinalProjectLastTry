@@ -15,7 +15,7 @@ import { albumsDetails } from '../Interfaces/albumsDetails.interface';
 export class AlbumsComponent implements OnInit {
   allAlbums: albums[] = [];
   allUsers: User[] = [];
-  albumsDetails: albumsDetails[] = [];
+  photos: albumsDetails[] = [];
 
   constructor(
     private albumService: albumsService,
@@ -32,11 +32,9 @@ export class AlbumsComponent implements OnInit {
       this.allUsers = response;
     });
 
-    this.albumService
-      .getPhotos()
-      .subscribe((albumsDetails: albumsDetails[]) => {
-        this.albumsDetails = albumsDetails;
-      });
+    this.albumService.getPhotos().subscribe((photos: albumsDetails[]) => {
+      this.photos = photos;
+    });
   }
 
   getUserById(userId: number): User | undefined {
@@ -48,7 +46,6 @@ export class AlbumsComponent implements OnInit {
   }
 
   getPhotosNumber(albumId: number): number {
-    return this.albumsDetails?.filter((photo) => photo.albumId === albumId)
-      .length;
+    return this.photos?.filter((photo) => photo.albumId === albumId).length;
   }
 }

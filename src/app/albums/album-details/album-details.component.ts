@@ -17,22 +17,10 @@ export class AlbumDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.albumService.getalbums().subscribe((response) => {
-      this.allAlbumDetails = response;
-    });
+    const albumId = parseInt(this.route.snapshot.paramMap.get('id')!);
 
-    this.route.params.subscribe((params) => {
-      const albumId = params['id'];
-      this.albumService
-        .getAlbumDetailsById(albumId)
-        .subscribe((albumDetails) => {
-          this.allAlbumDetails = albumDetails;
-        });
+    this.albumService.getPhotosByAlbumId(albumId).subscribe((photos) => {
+      this.allAlbumDetails = photos;
     });
-    this.albumService
-      .getPhotos()
-      .subscribe((allAlbumDetails: albumsDetails[]) => {
-        this.allAlbumDetails = allAlbumDetails;
-      });
   }
 }

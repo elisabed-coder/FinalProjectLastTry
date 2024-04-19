@@ -1,5 +1,7 @@
+import { VariableBinding } from '@angular/compiler';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormBuilder, NgForm, Validators } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 import { Post } from 'src/app/Interfaces/posts.interface';
 import { postService } from 'src/app/Services/posts.service';
 

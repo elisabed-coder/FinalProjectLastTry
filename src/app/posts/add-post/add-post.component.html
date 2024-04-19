@@ -9,15 +9,15 @@
     >
       <div>
         <label>Post Author</label>
-        <input type="text" name="name" required ngModel />
+        <input type="text" name="name" [required]="true" ngModel />
       </div>
       <div>
         <label for="">Title</label>
-        <input type="text" name="title" required ngModel />
+        <input type="text" name="title" [required]="true" ngModel />
       </div>
       <div>
         <label for="">Body</label>
-        <input type="text" name="body" required ngModel />
+        <input type="text" name="body" [required]="true" ngModel />
       </div>
       <div>
         <button type="submit" [disabled]="taskForm.invalid">Add</button>
