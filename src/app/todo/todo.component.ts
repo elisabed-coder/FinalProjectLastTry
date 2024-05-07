@@ -15,7 +15,6 @@ export class TodoComponent implements OnInit {
   ngOnInit(): void {
     this.toDoService.getTodoList().subscribe((toDo) => {
       this.todoList = toDo;
-      console.log(this.todoList);
     });
   }
   toggleCompletion(todo: toDo): void {
